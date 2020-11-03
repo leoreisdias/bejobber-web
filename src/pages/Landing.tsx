@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
+import PropagateLoader from 'react-spinners/PropagateLoader'
 
 import '../styles/pages/landing.css'
 
@@ -38,7 +39,10 @@ const Landing: React.FC = () => {
 
     if (latitude === 0 || longitude === 0) {
         return (
-            <h1>Carregando...</h1>
+            <div className="loadingSpinner">
+                <strong className="loadingStrong">Cadastro em Andamento | Por favor, aguarde...</strong>
+                <PropagateLoader size={30} color={"#964EDE"} />
+            </div>
         )
     }
 
