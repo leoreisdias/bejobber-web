@@ -28,14 +28,21 @@ const OrphanegesMap: React.FC = () => {
     useEffect(() => {
         const loadCurrentPosition = async () => {
             if (navigator.geolocation) {
-                await navigator.geolocation.getCurrentPosition(async (position) => {
-                    setLatitude(position.coords.latitude)
-                    setLongitude(position.coords.longitude)
 
-                    const response = await Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API}`)
-                    setCityName(response.data.results[0].address_components[2].short_name);
-                    setStateName(response.data.results[0].address_components[3].long_name);
-                })
+                try {
+                    await navigator.geolocation.getCurrentPosition(async (position) => {
+                        setLatitude(position.coords.latitude)
+                        setLongitude(position.coords.longitude)
+
+                        const response = await Axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${process.env.REACT_APP_GOOGLE_API}`)
+                        setCityName(response.data.results[0].address_components[2].short_name);
+                        setStateName(response.data.results[0].address_components[3].long_name);
+                    })
+
+                } catch (err) {
+                    alert('Precisamos de sua Localização para podermos fazer a busca de serviços!');
+                    loadCurrentPosition();
+                }
             }
             else {
                 alert('As funcionalidades do Website não são suportadas pelo seu navegador, por favor, utilize o Chrome ou Firefox Mozilla');

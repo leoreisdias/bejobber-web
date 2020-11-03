@@ -40,7 +40,7 @@ const Landing: React.FC = () => {
     if (latitude === 0 || longitude === 0) {
         return (
             <div className="loadingSpinner">
-                <strong className="loadingStrong">Cadastro em Andamento | Por favor, aguarde...</strong>
+                <strong className="loadingStrong">Construindo Site para você...</strong>
                 <PropagateLoader size={30} color={"#964EDE"} />
             </div>
         )
