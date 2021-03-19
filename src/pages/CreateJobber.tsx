@@ -72,7 +72,12 @@ export default function CreateJobber() {
       data.append('images', image);
     })
 
-    await api.post('users', data);
+    await api.post('users', data, {
+                headers: {
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
+            });
 
     alert('Cadastro Realizado com Sucesso!')
 
